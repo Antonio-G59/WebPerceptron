@@ -158,14 +158,14 @@
 
         dataset_url = ("https://raw.githubusercontent.com/Antonio-G59/WebPerceptron/refs/heads/main/Perceptron.csv")
         dataset = pd.read_csv(open_url(dataset_url))
-        dataset['label'] = dataset['label'].replace({'T':1, 'L':-1})
+        dataset['label'] = dataset['label'].replace({'T':1, 'L':-1}).astype(int)
 
         dataset_np = dataset.to_numpy()
 
         np.random.shuffle(dataset_np)
 
         X_test = dataset_np[60:97, :16]
-        y_test = dataset_np [60:97,:-1]
+        y_test = dataset_np [60:97, -1]
 
         def predict(X_test, weights, bias):
             linear_product = np.dot(X_test, weights) + bias
