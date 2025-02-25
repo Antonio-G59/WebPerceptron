@@ -169,7 +169,7 @@
         np.random.shuffle(dataset_np)
 
         X_test = dataset_np[60:97, :16]
-        y_test = dataset_np [60:97, -1]
+        y_test = dataset_np [60:97, 16]
 
         def predict(X_test, weights, bias):
             linear_product = np.dot(X_test, weights) + bias
