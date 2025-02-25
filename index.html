@@ -167,9 +167,9 @@
         y_test = dataset_np [60:97,:16]
 
         def predict(X_test, weights, bias):
-        linear_product = np.dot(X_test, weights) + bias
-        y_pred = activation_function(linear_product)
-        return ["T" if pred == 1 else "L" if pred == -1 else "Unknown" for pred in y_pred]
+            linear_product = np.dot(X_test, weights) + bias
+            y_pred = activation_function(linear_product)
+            return ["T" if pred == 1 else "L" if pred == -1 else "Unknown" for pred in y_pred]
 
         def get_np_switch_values():
         s1 = int(pydom["#switch1"][0].value)
