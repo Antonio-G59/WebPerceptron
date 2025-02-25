@@ -145,12 +145,16 @@
     <div id="mpl"></div>
 
     <script type="py" config="pyscript.toml">
-        
+        from pyodide.ffi import create_proxy
         import numpy as np
         import pandas as pd
         from pyodide.http import open_url
         from pyscript import display
         from pyweb import pydom
+
+        def print_to_console(message):
+            import js
+            js.console.log(message)
 
         weights = np.array([0.0, 0.01, 0.01, 0.01, 0.0, -0.01, 0.01, 0.0, 
                     0.0, -0.01, 0.01, 0.0, 0.0, -0.01, 0.0, -0.01])
@@ -170,6 +174,7 @@
         def predict(X_test, weights, bias):
             linear_product = np.dot(X_test, weights) + bias
             y_pred = activation_function(linear_product)
+            print("Linear Product:", linear_product)
             return ["T" if pred == 1 else "L" if pred == -1 else "Unknown" for pred in y_pred]
 
         def activation_function(x):
@@ -202,15 +207,19 @@
 
         def process_and_predict(event):
             test_x = get_np_switch_values()
+            print("Test Input in PyScript:", test_x)
             prediction = predict(test_x, weights, bias)
 
             text1 = str(prediction)
             predicted_class = "Predicted Shape: " + text1
             ##pydom['mp1'].content = predicted_class
             pydom["div#mpl"].html = predicted_class
-
+       
         print("PyScript Weights:", weights)
         print("PyScript Bias:", bias)
+
+
+
     </script>
 </section>
     
